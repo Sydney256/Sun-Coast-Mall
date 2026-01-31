@@ -3,37 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Sun Coast Mall</title>
-<link rel="icon" href="/Sun-Coast-Mall/favicon.ico?v=3">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/Sun-Coast-Mall/favicon.ico?v=4">
 
 <style>
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-/* Animated Background */
 body {
     height: 100vh;
-    background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(270deg, #0a0f14, #141f2a, #0a0f14);
     background-size: 600% 600%;
-    animation: gradientMove 12s ease infinite;
+    animation: bgMove 14s ease infinite;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    color: white;
 }
 
-@keyframes gradientMove {
+@keyframes bgMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Loader Screen */
+/* Loader */
 #loader {
     position: absolute;
     inset: 0;
@@ -41,18 +40,16 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 25px;
-    color: white;
+    gap: 24px;
     transition: opacity 1s ease, visibility 1s ease;
 }
 
-/* Spinner */
 .spinner {
-    width: 70px;
-    height: 70px;
-    border: 6px solid rgba(255,255,255,0.2);
-    border-top: 6px solid white;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
+    border: 6px solid rgba(255,255,255,0.15);
+    border-top-color: white;
     animation: spin 1s linear infinite;
 }
 
@@ -61,46 +58,59 @@ body {
 }
 
 #loader h1 {
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     letter-spacing: 2px;
     font-weight: 600;
 }
 
-/* Main UI */
-#ui {
+/* Main Content */
+#content {
     opacity: 0;
     visibility: hidden;
-    transform: scale(0.95);
-    transition: opacity 1s ease, transform 1s ease;
-    color: white;
+    transform: translateY(10px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
     text-align: center;
 }
 
-#ui.active {
+#content.active {
     opacity: 1;
     visibility: visible;
-    transform: scale(1);
+    transform: translateY(0);
 }
 
-/* UI Card */
 .card {
     background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
-    border-radius: 18px;
-    padding: 40px;
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    padding: 42px;
+    max-width: 520px;
     width: 90%;
-    max-width: 420px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
 .card h2 {
-    margin-bottom: 15px;
     font-weight: 600;
+    margin-bottom: 18px;
 }
 
 .card p {
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+/* Signature */
+.signature {
+    text-align: right;
+    font-style: italic;
     opacity: 0.85;
-    line-height: 1.5;
+}
+
+.signature strong {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 6px;
 }
 </style>
 </head>
@@ -113,24 +123,32 @@ body {
     <h1>Sun Coast Mall</h1>
 </div>
 
-<!-- UI -->
-<div id="ui">
+<!-- Content -->
+<div id="content">
     <div class="card">
-        <h2>Welcome to Sun Coast Mall</h2>
+        <h2>Notice</h2>
         <p>
-            Explore stores, events, dining and entertainment — all in one
-            modern experience.
+            This website is currently under development.
+            <br><br>
+            Any questions or concerns should be directed to
+            <strong>yer2089 (l0v3d_s0ul_)</strong>.
         </p>
+
+        <div class="signature">
+            Sincerely,<br>
+            <strong>yer2089</strong>
+            Co-Owner
+        </div>
     </div>
 </div>
 
 <script>
 setTimeout(() => {
-    document.getElementById("loader").style.opacity = "0";
-    document.getElementById("loader").style.visibility = "hidden";
+    const loader = document.getElementById("loader");
+    loader.style.opacity = "0";
+    loader.style.visibility = "hidden";
 
-    const ui = document.getElementById("ui");
-    ui.classList.add("active");
+    document.getElementById("content").classList.add("active");
 }, 7000);
 </script>
 
