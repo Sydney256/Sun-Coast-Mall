@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sun Coast Mall</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Animated Background */
+body {
+    height: 100vh;
+    background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
+    background-size: 600% 600%;
+    animation: gradientMove 12s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Loader Screen */
+#loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    color: white;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+/* Spinner */
+.spinner {
+    width: 70px;
+    height: 70px;
+    border: 6px solid rgba(255,255,255,0.2);
+    border-top: 6px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#loader h1 {
+    font-size: 2.3rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* Main UI */
+#ui {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95);
+    transition: opacity 1s ease, transform 1s ease;
+    color: white;
+    text-align: center;
+}
+
+#ui.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* UI Card */
+.card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+    padding: 40px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.card p {
+    opacity: 0.85;
+    line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Loader -->
+<div id="loader">
+    <div class="spinner"></div>
+    <h1>Sun Coast Mall</h1>
+</div>
+
+<!-- UI -->
+<div id="ui">
+    <div class="card">
+        <h2>Welcome to Sun Coast Mall</h2>
+        <p>
+            Explore stores, events, dining and entertainment — all in one
+            modern experience.
+        </p>
+    </div>
+</div>
+
+<script>
+setTimeout(() => {
+    document.getElementById("loader").style.opacity = "0";
+    document.getElementById("loader").style.visibility = "hidden";
+
+    const ui = document.getElementById("ui");
+    ui.classList.add("active");
+}, 7000);
+</script>
+
+</body>
+</html>
