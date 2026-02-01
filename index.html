@@ -4,172 +4,129 @@
 <meta charset="UTF-8">
 <title>Sun Coast Mall</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/Sun-Coast-Mall/favicon.ico?v=7">
+<link rel="icon" href="/Sun-Coast-Mall/favicon.ico?v=10">
 
 <style>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
 body {
-    height: 100vh;
-    background: linear-gradient(270deg, #0a0f14, #141f2a, #0a0f14);
-    background-size: 600% 600%;
-    animation: bgMove 16s ease infinite;
-    overflow: hidden;
-    color: white;
+  height: 100vh;
+  background: linear-gradient(270deg, #0a0f14, #141f2a, #0a0f14);
+  background-size: 600% 600%;
+  animation: bgMove 16s ease infinite;
+  overflow: hidden;
+  color: white;
 }
 
 @keyframes bgMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Loader */
 #loader {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 26px;
-    z-index: 10;
-    transition: opacity 1s ease, visibility 1s ease;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  z-index: 10;
+  transition: opacity 1s ease, visibility 1s ease;
 }
 
 .spinner {
-    width: 74px;
-    height: 74px;
-    border-radius: 50%;
-    border: 6px solid rgba(255,255,255,0.15);
-    border-top-color: white;
-    animation: spin 1s linear infinite;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 6px solid rgba(255,255,255,0.15);
+  border-top-color: white;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+  to { transform: rotate(360deg); }
 }
 
 #loader h1 {
-    font-size: 2.2rem;
-    letter-spacing: 2px;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
 }
 
 /* App */
 #app {
-    display: flex;
-    height: 100vh;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1s ease;
+  display: flex;
+  height: 100vh;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
 }
 
 #app.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 260px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(18px);
-    padding: 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
+  width: 260px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .sidebar h2 {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .nav button {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
-    color: white;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.25s;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.25s;
 }
 
 .nav button:hover {
-    background: rgba(255,255,255,0.18);
-    transform: translateX(4px);
+  background: rgba(255,255,255,0.18);
+  transform: translateX(4px);
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 /* Main */
 .main {
-    flex: 1;
-    padding: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .panel {
-    background: rgba(255,255,255,0.07);
-    backdrop-filter: blur(20px);
-    border-radius: 26px;
-    padding: 50px;
-    max-width: 640px;
-    width: 100%;
-}
-
-/* Login modal */
-#loginModal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-}
-
-.login-box {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(22px);
-    padding: 40px;
-    border-radius: 24px;
-    width: 340px;
-    text-align: center;
-}
-
-.login-box h3 {
-    margin-bottom: 20px;
-}
-
-.login-btn {
-    width: 100%;
-    padding: 14px;
-    margin-top: 12px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.roblox {
-    background: #ff4747;
-    color: white;
-}
-
-.discord {
-    background: #5865f2;
-    color: white;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(22px);
+  border-radius: 26px;
+  padding: 50px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
 }
 </style>
 </head>
@@ -178,114 +135,95 @@ body {
 
 <!-- Loader -->
 <div id="loader">
-    <div class="spinner"></div>
-    <h1>Sun Coast Mall</h1>
+  <div class="spinner"></div>
+  <h1>Sun Coast Mall</h1>
 </div>
 
 <!-- App -->
 <div id="app">
-    <div class="sidebar">
-        <h2>Sun Coast Mall</h2>
+  <div class="sidebar">
+    <h2>Sun Coast Mall</h2>
 
-        <div class="nav">
-            <button onclick="showHome()">Home</button>
-            <button onclick="openLogin()">Staff Login</button>
-            <button id="staffBtn" class="hidden" onclick="showStaff()">Staff Panel</button>
-        </div>
+    <div class="nav">
+      <button onclick="showHome()">Home</button>
+      <button onclick="loginDiscord()">Staff Login</button>
+      <button id="staffBtn" class="hidden" onclick="showStaff()">Staff Panel</button>
     </div>
+  </div>
 
-    <div class="main">
-        <div class="panel" id="content">
-            <h3>Welcome</h3>
-            <p>
-                Welcome to Sun Coast Mall.
-                <br><br>
-                This platform is currently under development.
-            </p>
-        </div>
+  <div class="main">
+    <div class="panel" id="content">
+      <h3>Welcome</h3>
+      <p>
+        Welcome to Sun Coast Mall.<br><br>
+        This website is currently under development.
+      </p>
     </div>
-</div>
-
-<!-- Login Modal -->
-<div id="loginModal">
-    <div class="login-box">
-        <h3>Staff Login</h3>
-
-        <button class="login-btn roblox" onclick="login('roblox')">
-            Continue with Roblox
-        </button>
-
-        <button class="login-btn discord" onclick="login('discord')">
-            Continue with Discord
-        </button>
-    </div>
+  </div>
 </div>
 
 <script>
+/* Loader */
 setTimeout(() => {
-    document.getElementById("loader").style.opacity = "0";
-    document.getElementById("loader").style.visibility = "hidden";
-    document.getElementById("app").classList.add("active");
+  document.getElementById("loader").style.opacity = "0";
+  document.getElementById("loader").style.visibility = "hidden";
+  document.getElementById("app").classList.add("active");
 }, 7000);
 
-function openLogin() {
-    document.getElementById("loginModal").style.display = "flex";
+/* Discord Login */
+function loginDiscord() {
+  window.location.href =
+    "https://sun-coast-mall-auth.vercel.app/api/auth/discord";
 }
 
-function login(type) {
-    document.getElementById("loginModal").style.display = "none";
-    document.getElementById("staffBtn").classList.remove("hidden");
-
-    document.getElementById("content").innerHTML = `
-        <h3>Logged in</h3>
-        <p>
-            Successfully authenticated via <strong>${type}</strong>.
-            <br><br>
-            Staff access has been granted.
-        </p>
-    `;
-}
-
+/* Pages */
 function showHome() {
-    document.getElementById("content").innerHTML = `
-        <h3>Welcome</h3>
-        <p>
-            Welcome to Sun Coast Mall.
-            <br><br>
-            More features coming soon.
-        </p>
-    `;
+  document.getElementById("content").innerHTML = `
+    <h3>Welcome</h3>
+    <p>
+      Welcome to Sun Coast Mall.<br><br>
+      More features coming soon.
+    </p>
+  `;
 }
 
 function showStaff() {
-    document.getElementById("content").innerHTML = `
-        <h3>Staff Panel</h3>
-        <p>
-            Internal staff tools and controls will appear here.
-        </p>
-    `;
-}
-
-const params = new URLSearchParams(window.location.search);
-const discordUser = params.get("discord");
-
-if (discordUser) {
-  document.getElementById("staffBtn")?.classList.remove("hidden");
-
   document.getElementById("content").innerHTML = `
-    <h3>Welcome, ${discordUser}</h3>
+    <h3>Staff Panel</h3>
     <p>
-      You have successfully logged in with Discord.
-      <br><br>
-      Staff access has been granted.
+      Internal staff tools and management features will appear here.
     </p>
   `;
-
-  // Clean URL (remove ?discord=...)
-  window.history.replaceState({}, document.title, "/");
 }
 
+/* Auto-login after Discord OAuth */
+const params = new URLSearchParams(window.location.search);
+const discordUser = params.get("discord");
+const discordId = params.get("id");
+const discordAvatar = params.get("avatar");
 
+if (discordUser && discordId) {
+  document.getElementById("staffBtn").classList.remove("hidden");
+
+  const avatarURL = discordAvatar
+    ? `https://cdn.discordapp.com/avatars/${discordId}/${discordAvatar}.png`
+    : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+  document.getElementById("content").innerHTML = `
+    <div style="display:flex;align-items:center;gap:24px">
+      <img src="${avatarURL}" style="width:80px;height:80px;border-radius:50%">
+      <div>
+        <h3>Logged in as ${discordUser}</h3>
+        <p>
+          Authenticated via <strong>Discord OAuth</strong>.<br>
+          Staff access has been granted.
+        </p>
+      </div>
+    </div>
+  `;
+
+  window.history.replaceState({}, document.title, "/");
+}
 </script>
 
 </body>
