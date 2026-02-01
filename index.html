@@ -265,6 +265,27 @@ function showStaff() {
         </p>
     `;
 }
+
+const params = new URLSearchParams(window.location.search);
+const discordUser = params.get("discord");
+
+if (discordUser) {
+  document.getElementById("staffBtn")?.classList.remove("hidden");
+
+  document.getElementById("content").innerHTML = `
+    <h3>Welcome, ${discordUser}</h3>
+    <p>
+      You have successfully logged in with Discord.
+      <br><br>
+      Staff access has been granted.
+    </p>
+  `;
+
+  // Clean URL (remove ?discord=...)
+  window.history.replaceState({}, document.title, "/");
+}
+
+
 </script>
 
 </body>
