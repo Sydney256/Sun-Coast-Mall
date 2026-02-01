@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Sun Coast Mall</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/Sun-Coast-Mall/favicon.ico?v=4">
+<link rel="icon" href="/Sun-Coast-Mall/favicon.ico?v=5">
 
 <style>
 * {
@@ -14,14 +14,12 @@
     font-family: "Segoe UI", system-ui, sans-serif;
 }
 
+/* Background */
 body {
     height: 100vh;
     background: linear-gradient(270deg, #0a0f14, #141f2a, #0a0f14);
     background-size: 600% 600%;
-    animation: bgMove 14s ease infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    animation: bgMove 16s ease infinite;
     overflow: hidden;
     color: white;
 }
@@ -34,19 +32,20 @@ body {
 
 /* Loader */
 #loader {
-    position: absolute;
+    position: fixed;
     inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 26px;
+    z-index: 10;
     transition: opacity 1s ease, visibility 1s ease;
 }
 
 .spinner {
-    width: 72px;
-    height: 72px;
+    width: 74px;
+    height: 74px;
     border-radius: 50%;
     border: 6px solid rgba(255,255,255,0.15);
     border-top-color: white;
@@ -63,54 +62,96 @@ body {
     font-weight: 600;
 }
 
-/* Main Content */
-#content {
+/* App UI */
+#app {
+    display: flex;
+    height: 100vh;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 1.2s ease, transform 1.2s ease;
-    text-align: center;
+    transition: opacity 1s ease;
 }
 
-#content.active {
+#app.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
-.card {
+/* Sidebar */
+.sidebar {
+    width: 260px;
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(18px);
-    border-radius: 22px;
-    padding: 42px;
-    max-width: 520px;
-    width: 90%;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    padding: 30px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 20px 0 40px rgba(0,0,0,0.4);
 }
 
-.card h2 {
+.sidebar h2 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
     font-weight: 600;
-    margin-bottom: 18px;
 }
 
-.card p {
+/* Nav buttons */
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav button {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: white;
+    font-size: 0.95rem;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.nav button:hover {
+    background: rgba(255,255,255,0.18);
+    transform: translateX(4px);
+}
+
+.coming {
+    opacity: 0.5;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* Main content */
+.main {
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel {
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(20px);
+    border-radius: 26px;
+    padding: 50px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+}
+
+.panel h3 {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.panel p {
     opacity: 0.9;
     line-height: 1.6;
-    margin-bottom: 28px;
-}
-
-/* Signature */
-.signature {
-    text-align: right;
-    font-style: italic;
-    opacity: 0.85;
-}
-
-.signature strong {
-    display: block;
-    font-style: normal;
-    font-weight: 600;
-    margin-top: 6px;
 }
 </style>
 </head>
@@ -123,21 +164,27 @@ body {
     <h1>Sun Coast Mall</h1>
 </div>
 
-<!-- Content -->
-<div id="content">
-    <div class="card">
-        <h2>Notice</h2>
-        <p>
-            This website is currently under development.
-            <br><br>
-            Any questions or concerns should be directed to
-            <strong>yer2089 (l0v3d_s0ul_)</strong>.
-        </p>
+<!-- App -->
+<div id="app">
+    <div class="sidebar">
+        <h2>Sun Coast Mall</h2>
 
-        <div class="signature">
-            Sincerely,<br>
-            <strong>yer2089</strong>
-            Co-Owner
+        <div class="nav">
+            <button onclick="showAbout()">About Us</button>
+            <div class="coming">More coming soon</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="panel" id="content">
+            <h3>Welcome</h3>
+            <p>
+                Welcome to Sun Coast Mall.
+                <br><br>
+                Our digital experience is currently under development.
+                More features, sections, and interactive content will be
+                rolling out soon.
+            </p>
         </div>
     </div>
 </div>
@@ -148,8 +195,21 @@ setTimeout(() => {
     loader.style.opacity = "0";
     loader.style.visibility = "hidden";
 
-    document.getElementById("content").classList.add("active");
+    document.getElementById("app").classList.add("active");
 }, 7000);
+
+function showAbout() {
+    document.getElementById("content").innerHTML = `
+        <h3>About Sun Coast Mall</h3>
+        <p>
+            Sun Coast Mall is a premium destination for shopping,
+            dining, and entertainment.
+            <br><br>
+            Our website is currently being redesigned to deliver
+            a modern, seamless experience for all visitors.
+        </p>
+    `;
+}
 </script>
 
 </body>
